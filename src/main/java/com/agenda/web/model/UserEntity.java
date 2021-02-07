@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User implements Serializable
+public class UserEntity implements Serializable
 {	
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -29,8 +29,8 @@ public class User implements Serializable
 	private long id;
 	@Column(name = "name", nullable = false)
 	private String name;
-	@Column(name = "email", nullable = false)
-	private String email;
+	@Column(name = "username", nullable = false)
+	private String username;
 	@Column(name = "password", nullable = false)
 	private String password;	
 }

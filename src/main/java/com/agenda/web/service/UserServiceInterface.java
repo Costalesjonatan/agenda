@@ -1,12 +1,12 @@
 package com.agenda.web.service;
 
-import com.agenda.web.model.User;
+import com.agenda.web.model.UserEntity;
 
 public interface UserServiceInterface 
 {
-	User createUser(User user);
+	UserEntity createUser(UserEntity user);
 	
-	void deleteUser(User user);
+	void deleteUser(UserEntity user);
 	
-	public User findbyEmail(String email);
+	public UserEntity findbyUsername(String username);
 }

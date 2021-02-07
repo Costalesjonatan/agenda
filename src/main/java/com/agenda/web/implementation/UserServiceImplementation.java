@@ -3,7 +3,7 @@ package com.agenda.web.implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.agenda.web.model.User;
+import com.agenda.web.model.UserEntity;
 import com.agenda.web.repository.UserDAOInterface;
 import com.agenda.web.service.UserServiceInterface;
 
@@ -14,18 +14,18 @@ public class UserServiceImplementation implements UserServiceInterface{
 	private UserDAOInterface UserDAO;
 	
 	@Override
-	public User createUser(User user) {
+	public UserEntity createUser(UserEntity user) {
 		return UserDAO.save(user);
 	}
 	
 	@Override
-	public void deleteUser(User user) {
+	public void deleteUser(UserEntity user) {
 		UserDAO.delete(user);
 	}
 
 	@Override
-	public User findbyEmail(String email) {
-		return UserDAO.findbyEmail(email);
+	public UserEntity findbyUsername(String username) {
+		return UserDAO.findbyUsername(username);
 	}
 
 	
