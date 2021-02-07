@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.agenda.web.model.Contact;
 
-public interface ContactRepository extends JpaRepository<Contact, Long>{
+public interface ContactDAOInterface extends JpaRepository<Contact, Long>{
 
 }

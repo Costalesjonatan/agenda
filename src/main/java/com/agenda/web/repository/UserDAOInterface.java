@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.agenda.web.model.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>  
+public interface UserDAOInterface extends JpaRepository<User, Long>  
 {
+	
 	public User findbyEmail(String email);
 }
