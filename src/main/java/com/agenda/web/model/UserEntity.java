@@ -28,8 +28,6 @@ public class UserEntity implements Serializable
 	@Column(name = "id", nullable = false)
 	private long id;
 	@Column(name = "name", nullable = false)
-	private String name;
-	@Column(name = "username", nullable = false)
 	private String username;
 	@Column(name = "password", nullable = false)
 	private String password;	
