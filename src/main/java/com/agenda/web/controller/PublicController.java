@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/public")
 public class PublicController {
-	@GetMapping("/home")
+	@GetMapping("/logout")
 	public String home() {
 		return "logout";
 	}

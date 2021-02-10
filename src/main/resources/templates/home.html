@@ -9,8 +9,10 @@
 				<div class="card card-body">
 					<span th:if="${session.usuario !=null}">Bienvenido/a<span class="font-italic"th:text="${session.usuario.username}"></span></span>
 					
-					<form th:action="@{/logout}"method="POST"></form>
+					<form th:action="@{/logout}"method="POST">
 						<button type="submit"class="btn btn-primary mt-3">Salir</button>
+					</form>
+						
 				</div>
 			</div>
 		</div>

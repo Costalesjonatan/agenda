@@ -35,7 +35,7 @@ public class SecuriryConfig extends WebSecurityConfigurerAdapter
 			.formLogin().loginPage("/auth/login").defaultSuccessUrl("/private/home", true).failureUrl("/auth/login?error=true")
 			.loginProcessingUrl("/auth/login-post").permitAll()
 		.and()
-			.logout().logoutUrl("/logout").logoutSuccessUrl("/public/home");
+			.logout().logoutUrl("/logout").logoutSuccessUrl("/public/logout");
 	}
 	
 	
