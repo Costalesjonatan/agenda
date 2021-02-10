@@ -19,8 +19,14 @@ public class LoginController {
 	@Autowired
 	private UserServiceInterface usuarioService;
 	
+	@GetMapping("/auth/login")
+	public String login(Model model) {
+		model.addAttribute("usuario", new UserEntity());
+		return "login";
+	}
+	
 	@GetMapping("/auth/registro")
-	public String registroForm(Model model) {
+	public String registro(Model model) {
 		model.addAttribute("usuario", new UserEntity());
 		
 		return "registro";
