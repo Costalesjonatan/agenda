@@ -17,8 +17,8 @@ class ContactServiceTest {
 
 	@Test
 	public void shouldCreateContact() {
-		giverContactService();
 		givenContactDAO();
+		giverContactService();
 		
 		contactService.createContact(Contact.builder()
 				.id(1)
@@ -34,7 +34,7 @@ class ContactServiceTest {
 	}
 	
 	private void giverContactService() {
-		contactService = new ContactServiceImplementation();
+		contactService = new ContactServiceImplementation(contactDAO);
 	}
 	
 	private void givenContactDAO() {

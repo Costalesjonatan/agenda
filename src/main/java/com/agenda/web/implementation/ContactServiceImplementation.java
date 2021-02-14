@@ -9,7 +9,12 @@ import com.agenda.web.model.Contact;
 import com.agenda.web.repository.ContactDAOInterface;
 import com.agenda.web.service.ContactServiceInterface;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 @Service
+@NoArgsConstructor
+@AllArgsConstructor
 public class ContactServiceImplementation implements ContactServiceInterface  {
 	
 	@Autowired
@@ -17,8 +22,8 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 	
 	@Override
 	public Contact createContact(Contact contact) {
-		// TODO Auto-generated method stub
-		return null;
+		contactDAO.save(contact);
+		return contact;
 	}
 
 	@Override
