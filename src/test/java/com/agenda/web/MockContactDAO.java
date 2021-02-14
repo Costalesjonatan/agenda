@@ -11,11 +11,21 @@ import org.springframework.data.domain.Sort;
 
 import com.agenda.web.model.Contact;
 import com.agenda.web.repository.ContactDAOInterface;
-import com.demo.proyectoBackend.model.User;
 
 public class MockContactDAO implements ContactDAOInterface{
 	
-	private HashMap<Long, Contact> contacts = new HashMap<Long, User>();
+	private HashMap<Long, Contact> contacts = new HashMap<Long, Contact>();
+	
+	@Override
+	public <S extends Contact> S save(S entity) {
+		contacts.put(entity.getId(), entity);
+		return null;
+	}
+
+	@Override
+	public Optional<Contact> findById(Long id) {
+		return Optional.ofNullable(contacts.get(id));
+	}
 
 	@Override
 	public List<Contact> findAll() {
@@ -85,18 +95,6 @@ public class MockContactDAO implements ContactDAOInterface{
 
 	@Override
 	public Page<Contact> findAll(Pageable pageable) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public <S extends Contact> S save(S entity) {
-		contacts.put(entity.getId(), entity)
-		return null;
-	}
-
-	@Override
-	public Optional<Contact> findById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
