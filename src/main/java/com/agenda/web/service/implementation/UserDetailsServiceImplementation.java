@@ -1,4 +1,4 @@
-package com.agenda.web.service;
+package com.agenda.web.service.implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

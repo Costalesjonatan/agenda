@@ -1,4 +1,4 @@
-package com.agenda.web.implementation;
+package com.agenda.web.service.implementation;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,17 +37,12 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 	public Contact updateContact(Contact contact) {
 		validateContact(contact);
 		
-		Optional<Contact> contactDb = contactDAO.findById(contact.getId());
+		Contact contactUpdate = validateContactExistInDb(contact);
 		
-		if(contactDb.isPresent()) {
-			Contact contactUpdate = contactDb.get();
-			contactUpdate.setName(contact.getName());
-			contactUpdate.setNumber(contact.getNumber());
-			
-			return contactUpdate;
-		} else {
-			throw new ResourceNotFoundException("No se encontró el contacto con el id: " + contact.getId());
-		}
+		contactUpdate.setName(contact.getName());
+		contactUpdate.setNumber(contact.getNumber());
+		
+		return contactUpdate;
 	}
 
 	@Override
@@ -64,7 +59,6 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 
 	@Override
 	public void validateContact(Contact contact) {
-		
 		if(contact.getNumber() == null)
 		{
 			throw new NullDataException("El numero no puede ser nulo");
@@ -85,6 +79,19 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 		if(contact.getName().length() == 0 )
 		{
 			throw new InvalidDataException("El nombre no puede ser vacio");
+		}
+	}
+
+	@Override
+	public Contact validateContactExistInDb(Contact contact) {
+		Optional<Contact> contactDb = contactDAO.findById(contact.getId());
+		
+		if(!contactDb.isPresent()){
+			throw new ResourceNotFoundException("No se encontró el contacto con el id: " + contact.getId());
+		}
+		else
+		{
+			return contactDb.get();
 		}
 	}
 }

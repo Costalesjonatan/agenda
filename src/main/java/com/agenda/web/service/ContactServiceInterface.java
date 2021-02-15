@@ -11,5 +11,5 @@ public interface ContactServiceInterface {
 	public void deleteConatct(Long id);
 	public List<Contact> getAllContactsOfAuserForId(long id);
 	public void validateContact(Contact contact);
-	
+	public Contact validateContactExistInDb(Contact contact);
 }

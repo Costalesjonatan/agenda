@@ -8,9 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import com.agenda.web.exception.InvalidDataException;
 import com.agenda.web.exception.NullDataException;
-import com.agenda.web.implementation.ContactServiceImplementation;
+import com.agenda.web.exception.ResourceNotFoundException;
 import com.agenda.web.model.Contact;
 import com.agenda.web.repository.ContactDAOInterface;
+import com.agenda.web.service.implementation.ContactServiceImplementation;
 
 class ContactServiceTest {
 	
@@ -62,6 +63,46 @@ class ContactServiceTest {
 		
 		assertTrue(contact.getName().equals("aaron") && 
 				contact.getNumber().equals("1125609876") && 
+				contact.getIdUser() == 1 && 
+				contact.getId() == 1);
+	}
+	
+	@Test
+	public void validateContactExistsExceptionTest() {
+		givenContactDAO();
+		givenContactService();
+		
+		assertThrows(ResourceNotFoundException.class, () -> {
+			contactService.validateContactExistInDb(Contact.builder()
+					.id(2)
+					.name("aaron")
+					.number("1125609876")
+					.idUser(1)
+					.build());
+	  });
+	}
+	
+	@Test
+	public void validateContactExistsTest() {
+		givenContactDAO();
+		givenContactService();
+		
+		contactService.createContact(Contact.builder()
+				.id(1)
+				.name("jonatan")
+				.number("1139586203")
+				.idUser(1)
+				.build());
+		
+		Contact contact = contactService.validateContactExistInDb(Contact.builder()
+				.id(1)
+				.name("jonatan")
+				.number("1139586203")
+				.idUser(1)
+				.build());
+		
+		assertTrue(contact.getName().equals("jonatan") && 
+				contact.getNumber().equals("1139586203") && 
 				contact.getIdUser() == 1 && 
 				contact.getId() == 1);
 	}
