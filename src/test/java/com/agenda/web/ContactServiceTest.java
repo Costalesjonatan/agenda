@@ -68,6 +68,25 @@ class ContactServiceTest {
 	}
 	
 	@Test
+	public void shouldDeleteContact(){
+		givenContactDAO();
+		givenContactService();
+		
+		contactService.createContact(Contact.builder()
+				.id(1)
+				.name("jonatan")
+				.number("1139586203")
+				.idUser(1)
+				.build());
+		
+		contactService.deleteContact((long)1);
+		
+		assertThrows(ResourceNotFoundException.class, () -> {
+			contactService.validateContactExistsInDbById(1);
+		});
+	}	
+	
+	@Test
 	public void validateContactExistsExceptionTest() {
 		givenContactDAO();
 		givenContactService();

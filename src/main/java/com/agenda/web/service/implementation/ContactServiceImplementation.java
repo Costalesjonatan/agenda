@@ -47,8 +47,8 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 
 	@Override
 	public void deleteContact(Long id) {
-		
-		
+		Contact deleteContact = validateContactExistsInDbById(id);
+		contactDAO.delete(deleteContact);
 	}
 
 	@Override

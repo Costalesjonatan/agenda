@@ -26,6 +26,11 @@ public class MockContactDAO implements ContactDAOInterface{
 	public Optional<Contact> findById(Long id) {
 		return Optional.ofNullable(contacts.get(id));
 	}
+	
+	@Override
+	public void delete(Contact entity) {
+		contacts.remove(entity.getId());
+	}
 
 	@Override
 	public List<Contact> findAll() {
@@ -113,12 +118,6 @@ public class MockContactDAO implements ContactDAOInterface{
 
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Contact entity) {
 		// TODO Auto-generated method stub
 		
 	}
