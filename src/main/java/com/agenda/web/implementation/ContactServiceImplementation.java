@@ -54,5 +54,9 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 			throw new InvalidDataException("El nombre no puede ser vacio");
 		}
 		
+		if(contact.getName().length() == 0)
+		{
+			throw new InvalidDataException("El nombre no puede ser vacio");
+		}
 	}
 }
