@@ -46,8 +46,8 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 	}
 
 	@Override
-	public void deleteConatct(Long id) {
-		// TODO Auto-generated method stub
+	public void deleteContact(Long id) {
+		
 		
 	}
 
@@ -89,9 +89,20 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 		if(!contactDb.isPresent()){
 			throw new ResourceNotFoundException("No se encontró el contacto con el id: " + contact.getId());
 		}
-		else
-		{
+		else{
 			return contactDb.get();
 		}
+	}
+	
+	public Contact validateContactExistsInDbById(long id)
+	{
+		Optional<Contact> contactDb = contactDAO.findById(id);
+		
+		if(!contactDb.isPresent()){
+			throw new ResourceNotFoundException("No se encontró el contacto con el id: " + id);
+		}
+		else{
+			return contactDb.get();
+		}	
 	}
 }

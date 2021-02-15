@@ -108,6 +108,36 @@ class ContactServiceTest {
 	}
 	
 	@Test
+	public void validateContactExistsByIdExceptionTest() {
+		givenContactDAO();
+		givenContactService();
+		
+		assertThrows(ResourceNotFoundException.class, () -> {
+			contactService.validateContactExistsInDbById(2);
+	  });
+	}
+	
+	@Test
+	public void validateContactExistsByIdTest() {
+		givenContactDAO();
+		givenContactService();
+		
+		contactService.createContact(Contact.builder()
+				.id(1)
+				.name("jonatan")
+				.number("1139586203")
+				.idUser(1)
+				.build());
+		
+		Contact contact = contactService.validateContactExistsInDbById(1);
+		
+		assertTrue(contact.getName().equals("jonatan") && 
+				contact.getNumber().equals("1139586203") && 
+				contact.getIdUser() == 1 && 
+				contact.getId() == 1);
+	}
+	
+	@Test
 	public void validateNullNameTest(){
 		givenContactService();
 		
