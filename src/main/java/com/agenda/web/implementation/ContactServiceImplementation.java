@@ -46,7 +46,8 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 
 	@Override
 	public void validateContact(Contact contact) {
-		// TODO Auto-generated method stub
+		
+		
 		
 	}
 }
