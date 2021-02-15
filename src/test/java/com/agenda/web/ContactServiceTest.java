@@ -42,7 +42,7 @@ class ContactServiceTest {
 		assertThrows(InvalidDataException.class, () -> {
 			contactService.createContact(Contact.builder()
 					.id(1)
-					.name("")
+					.name(null)
 					.number("1139586203")
 					.idUser(1)
 					.build());
