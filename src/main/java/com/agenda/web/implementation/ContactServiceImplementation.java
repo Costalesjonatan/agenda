@@ -1,6 +1,8 @@
 package com.agenda.web.implementation;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,12 +52,24 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 	@Override
 	public void validateContact(Contact contact) {
 		
-		if(contact.getName() == null || contact.getNumber() == null)
+		if(contact.getNumber() == null)
 		{
-			throw new NullDataException("El nombre no puede ser vacio");
+			throw new NullDataException("El numero no puede ser nulo");
 		}
-		
-		if(contact.getName().length() == 0)
+		else {
+			Pattern pattern = Pattern.compile("(\\d{10})");
+			Matcher matcher = pattern.matcher(contact.getNumber()); 
+			
+			if(!matcher.find())
+			{
+				throw new InvalidDataException("nuemro de telefono invalido");
+			}
+		}
+		if(contact.getName() == null)
+		{
+			throw new NullDataException("El nombre no puede ser nulo");
+		}
+		if(contact.getName().length() == 0 )
 		{
 			throw new InvalidDataException("El nombre no puede ser vacio");
 		}

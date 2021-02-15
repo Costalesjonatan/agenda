@@ -80,6 +80,36 @@ class ContactServiceTest {
 	  });	
 	}
 	
+	@Test
+	public void shouldNotCreateContactBecuseEmptyNumber(){
+		givenContactDAO();
+		giverContactService();
+		
+		assertThrows(InvalidDataException.class, () -> {
+			contactService.createContact(Contact.builder()
+					.id(1)
+					.name("jonatan")
+					.number("")
+					.idUser(1)
+					.build());
+	  });	
+	}
+	
+	@Test
+	public void shouldNotCreateContactBecuseInvalidNumber(){
+		givenContactDAO();
+		giverContactService();
+		
+		assertThrows(InvalidDataException.class, () -> {
+			contactService.createContact(Contact.builder()
+					.id(1)
+					.name("jonatan")
+					.number("113245678")
+					.idUser(1)
+					.build());
+	  });	
+	}
+	
 	private void giverContactService() {
 		contactService = new ContactServiceImplementation(contactDAO);
 	}
