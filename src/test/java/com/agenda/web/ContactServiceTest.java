@@ -105,6 +105,13 @@ class ContactServiceTest {
 				.userid(1)
 				.build());
 		
+		contactService.createContact(Contact.builder()
+				.id(3)
+				.name("aaron")
+				.number("1123456777")
+				.userid(2)
+				.build());
+		
 		assertTrue(contactService.getAllContactByUserId(1).size() == 2);
 	}
 	

@@ -34,12 +34,12 @@ public class MockContactDAO implements ContactDAOInterface{
 	}
 	
 	@Override
-	public List<Contact> getAllContactByuserid(long id) {
+	public List<Contact> getAllContactByuserid(long userid) {
 		
 		ArrayList<Contact> contactsOfId = new ArrayList<Contact>();
 		
 		contacts.forEach((key, value) -> {
-			if(value.getUserid() == id){
+			if(value.getUserid() == userid){
 				contactsOfId.add(value);
 			}
 		});
