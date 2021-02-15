@@ -18,9 +18,9 @@ class ContactServiceTest {
 	private ContactDAOInterface contactDAO;
 
 	@Test
-	public void shouldCreateContact() {
+	public void shouldCreateContactTest() {
 		givenContactDAO();
-		giverContactService();
+		givenContactService();
 		
 		contactService.createContact(Contact.builder()
 				.id(1)
@@ -32,16 +32,46 @@ class ContactServiceTest {
 		Optional<Contact> contactCreated = contactDAO.findById((long) 1);
 		Contact contact = contactCreated.get();
 		
-		assertTrue(contact.getName().equals("jonatan") && contact.getNumber().equals("1139586203") && contact.getIdUser() == 1);
+		assertTrue(contact.getName().equals("jonatan") && 
+				contact.getNumber().equals("1139586203") && 
+				contact.getIdUser() == 1 && 
+				contact.getId() == 1);
 	}
 	
 	@Test
-	public void shouldNotCreateContactBecuseNullName(){
+	public void shouldUpdateContact() {
 		givenContactDAO();
-		giverContactService();
+		givenContactService();
+		
+		contactService.createContact(Contact.builder()
+				.id(1)
+				.name("jonatan")
+				.number("1139586203")
+				.idUser(1)
+				.build());
+		
+		contactService.updateContact(Contact.builder()
+				.id(1)
+				.name("aaron")
+				.number("1125609876")
+				.idUser(1)
+				.build());
+		
+		Optional<Contact> contactUpdated = contactDAO.findById((long) 1);
+		Contact contact = contactUpdated.get();
+		
+		assertTrue(contact.getName().equals("aaron") && 
+				contact.getNumber().equals("1125609876") && 
+				contact.getIdUser() == 1 && 
+				contact.getId() == 1);
+	}
+	
+	@Test
+	public void validateNullNameTest(){
+		givenContactService();
 		
 		assertThrows(NullDataException.class, () -> {
-			contactService.createContact(Contact.builder()
+			contactService.validateContact(Contact.builder()
 					.id(1)
 					.name(null)
 					.number("1139586203")
@@ -51,12 +81,11 @@ class ContactServiceTest {
 	}
 	
 	@Test
-	public void shouldNotCreateContactBecuseEmptyName(){
-		givenContactDAO();
-		giverContactService();
+	public void validateEmptyNameTest(){
+		givenContactService();
 		
 		assertThrows(InvalidDataException.class, () -> {
-			contactService.createContact(Contact.builder()
+			contactService.validateContact(Contact.builder()
 					.id(1)
 					.name("")
 					.number("1139586203")
@@ -66,12 +95,11 @@ class ContactServiceTest {
 	}
 	
 	@Test
-	public void shouldNotCreateContactBecuseNullNumber(){
-		givenContactDAO();
-		giverContactService();
+	public void validateNullNumberTest(){
+		givenContactService();
 		
 		assertThrows(NullDataException.class, () -> {
-			contactService.createContact(Contact.builder()
+			contactService.validateContact(Contact.builder()
 					.id(1)
 					.name("jonatan")
 					.number(null)
@@ -82,11 +110,10 @@ class ContactServiceTest {
 	
 	@Test
 	public void shouldNotCreateContactBecuseEmptyNumber(){
-		givenContactDAO();
-		giverContactService();
+		givenContactService();
 		
 		assertThrows(InvalidDataException.class, () -> {
-			contactService.createContact(Contact.builder()
+			contactService.validateContact(Contact.builder()
 					.id(1)
 					.name("jonatan")
 					.number("")
@@ -97,11 +124,10 @@ class ContactServiceTest {
 	
 	@Test
 	public void shouldNotCreateContactBecuseInvalidNumber(){
-		givenContactDAO();
-		giverContactService();
+		givenContactService();
 		
 		assertThrows(InvalidDataException.class, () -> {
-			contactService.createContact(Contact.builder()
+			contactService.validateContact(Contact.builder()
 					.id(1)
 					.name("jonatan")
 					.number("113245678")
@@ -110,7 +136,7 @@ class ContactServiceTest {
 	  });	
 	}
 	
-	private void giverContactService() {
+	private void givenContactService() {
 		contactService = new ContactServiceImplementation(contactDAO);
 	}
 	

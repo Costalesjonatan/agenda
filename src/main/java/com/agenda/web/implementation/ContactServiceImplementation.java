@@ -1,6 +1,7 @@
 package com.agenda.web.implementation;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.agenda.web.exception.InvalidDataException;
 import com.agenda.web.exception.NullDataException;
+import com.agenda.web.exception.ResourceNotFoundException;
 import com.agenda.web.model.Contact;
 import com.agenda.web.repository.ContactDAOInterface;
 import com.agenda.web.service.ContactServiceInterface;
@@ -33,8 +35,19 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 
 	@Override
 	public Contact updateContact(Contact contact) {
-		// TODO Auto-generated method stub
-		return null;
+		validateContact(contact);
+		
+		Optional<Contact> contactDb = contactDAO.findById(contact.getId());
+		
+		if(contactDb.isPresent()) {
+			Contact contactUpdate = contactDb.get();
+			contactUpdate.setName(contact.getName());
+			contactUpdate.setNumber(contact.getNumber());
+			
+			return contactUpdate;
+		} else {
+			throw new ResourceNotFoundException("No se encontró el contacto con el id: " + contact.getId());
+		}
 	}
 
 	@Override
