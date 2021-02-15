@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import com.agenda.web.exception.InvalidDataException;
+import com.agenda.web.exception.NullDataException;
 import com.agenda.web.implementation.ContactServiceImplementation;
 import com.agenda.web.model.Contact;
 import com.agenda.web.repository.ContactDAOInterface;
@@ -39,7 +40,7 @@ class ContactServiceTest {
 		givenContactDAO();
 		giverContactService();
 		
-		assertThrows(InvalidDataException.class, () -> {
+		assertThrows(NullDataException.class, () -> {
 			contactService.createContact(Contact.builder()
 					.id(1)
 					.name(null)
@@ -59,6 +60,21 @@ class ContactServiceTest {
 					.id(1)
 					.name("")
 					.number("1139586203")
+					.idUser(1)
+					.build());
+	  });	
+	}
+	
+	@Test
+	public void shouldNotCreateContactBecuseNullNumber(){
+		givenContactDAO();
+		giverContactService();
+		
+		assertThrows(NullDataException.class, () -> {
+			contactService.createContact(Contact.builder()
+					.id(1)
+					.name("jonatan")
+					.number(null)
 					.idUser(1)
 					.build());
 	  });	

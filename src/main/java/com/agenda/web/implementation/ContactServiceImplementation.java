@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.agenda.web.exception.InvalidDataException;
+import com.agenda.web.exception.NullDataException;
 import com.agenda.web.model.Contact;
 import com.agenda.web.repository.ContactDAOInterface;
 import com.agenda.web.service.ContactServiceInterface;
@@ -49,9 +50,9 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 	@Override
 	public void validateContact(Contact contact) {
 		
-		if(contact.getName() == null)
+		if(contact.getName() == null || contact.getNumber() == null)
 		{
-			throw new InvalidDataException("El nombre no puede ser vacio");
+			throw new NullDataException("El nombre no puede ser vacio");
 		}
 		
 		if(contact.getName().length() == 0)
