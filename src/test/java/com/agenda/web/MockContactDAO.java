@@ -1,5 +1,6 @@
 package com.agenda.web;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,20 @@ public class MockContactDAO implements ContactDAOInterface{
 	@Override
 	public void delete(Contact entity) {
 		contacts.remove(entity.getId());
+	}
+	
+	@Override
+	public List<Contact> getAllContactByuserid(long id) {
+		
+		ArrayList<Contact> contactsOfId = new ArrayList<Contact>();
+		
+		contacts.forEach((key, value) -> {
+			if(value.getUserid() == id){
+				contactsOfId.add(value);
+			}
+		});
+		
+		return contactsOfId;
 	}
 
 	@Override
@@ -157,11 +172,4 @@ public class MockContactDAO implements ContactDAOInterface{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public List<Contact> getAllContactsOfAuserForId(long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

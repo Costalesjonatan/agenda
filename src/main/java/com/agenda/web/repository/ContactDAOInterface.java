@@ -9,5 +9,5 @@ import com.agenda.web.model.Contact;
 
 @Repository
 public interface ContactDAOInterface extends JpaRepository<Contact, Long>{
-	public List<Contact> getAllContactsOfAuserForId(long id);
+	public List<Contact> getAllContactByuserid(long id);
 }

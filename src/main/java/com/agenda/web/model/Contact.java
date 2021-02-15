@@ -28,6 +28,6 @@ public class Contact
 	private String name;
 	@Column(name = "number", nullable = false)
 	private String number;
-	@Column(name = "idUser", nullable = false)
-	private long idUser;
+	@Column(name = "userid", nullable = false)
+	private long userid;
 }

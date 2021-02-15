@@ -27,7 +27,7 @@ class ContactServiceTest {
 				.id(1)
 				.name("jonatan")
 				.number("1139586203")
-				.idUser(1)
+				.userid(1)
 				.build());
 		
 		Optional<Contact> contactCreated = contactDAO.findById((long) 1);
@@ -35,7 +35,7 @@ class ContactServiceTest {
 		
 		assertTrue(contact.getName().equals("jonatan") && 
 				contact.getNumber().equals("1139586203") && 
-				contact.getIdUser() == 1 && 
+				contact.getUserid() == 1 && 
 				contact.getId() == 1);
 	}
 	
@@ -48,14 +48,14 @@ class ContactServiceTest {
 				.id(1)
 				.name("jonatan")
 				.number("1139586203")
-				.idUser(1)
+				.userid(1)
 				.build());
 		
 		contactService.updateContact(Contact.builder()
 				.id(1)
 				.name("aaron")
 				.number("1125609876")
-				.idUser(1)
+				.userid(1)
 				.build());
 		
 		Optional<Contact> contactUpdated = contactDAO.findById((long) 1);
@@ -63,7 +63,7 @@ class ContactServiceTest {
 		
 		assertTrue(contact.getName().equals("aaron") && 
 				contact.getNumber().equals("1125609876") && 
-				contact.getIdUser() == 1 && 
+				contact.getUserid() == 1 && 
 				contact.getId() == 1);
 	}
 	
@@ -76,7 +76,7 @@ class ContactServiceTest {
 				.id(1)
 				.name("jonatan")
 				.number("1139586203")
-				.idUser(1)
+				.userid(1)
 				.build());
 		
 		contactService.deleteContact((long)1);
@@ -84,7 +84,29 @@ class ContactServiceTest {
 		assertThrows(ResourceNotFoundException.class, () -> {
 			contactService.validateContactExistsInDbById(1);
 		});
-	}	
+	}
+	
+	@Test
+	public void shouldGetAllContactByUserId(){
+		givenContactDAO();
+		givenContactService();
+		
+		contactService.createContact(Contact.builder()
+				.id(1)
+				.name("jonatan")
+				.number("1139586203")
+				.userid(1)
+				.build());
+		
+		contactService.createContact(Contact.builder()
+				.id(2)
+				.name("aaron")
+				.number("1123456777")
+				.userid(1)
+				.build());
+		
+		assertTrue(contactService.getAllContactByUserId(1).size() == 2);
+	}
 	
 	@Test
 	public void validateContactExistsExceptionTest() {
@@ -96,7 +118,7 @@ class ContactServiceTest {
 					.id(2)
 					.name("aaron")
 					.number("1125609876")
-					.idUser(1)
+					.userid(1)
 					.build());
 	  });
 	}
@@ -110,19 +132,19 @@ class ContactServiceTest {
 				.id(1)
 				.name("jonatan")
 				.number("1139586203")
-				.idUser(1)
+				.userid(1)
 				.build());
 		
 		Contact contact = contactService.validateContactExistInDb(Contact.builder()
 				.id(1)
 				.name("jonatan")
 				.number("1139586203")
-				.idUser(1)
+				.userid(1)
 				.build());
 		
 		assertTrue(contact.getName().equals("jonatan") && 
 				contact.getNumber().equals("1139586203") && 
-				contact.getIdUser() == 1 && 
+				contact.getUserid() == 1 && 
 				contact.getId() == 1);
 	}
 	
@@ -145,14 +167,14 @@ class ContactServiceTest {
 				.id(1)
 				.name("jonatan")
 				.number("1139586203")
-				.idUser(1)
+				.userid(1)
 				.build());
 		
 		Contact contact = contactService.validateContactExistsInDbById(1);
 		
 		assertTrue(contact.getName().equals("jonatan") && 
 				contact.getNumber().equals("1139586203") && 
-				contact.getIdUser() == 1 && 
+				contact.getUserid() == 1 && 
 				contact.getId() == 1);
 	}
 	
@@ -165,7 +187,7 @@ class ContactServiceTest {
 					.id(1)
 					.name(null)
 					.number("1139586203")
-					.idUser(1)
+					.userid(1)
 					.build());
 	  });	
 	}
@@ -179,7 +201,7 @@ class ContactServiceTest {
 					.id(1)
 					.name("")
 					.number("1139586203")
-					.idUser(1)
+					.userid(1)
 					.build());
 	  });	
 	}
@@ -193,7 +215,7 @@ class ContactServiceTest {
 					.id(1)
 					.name("jonatan")
 					.number(null)
-					.idUser(1)
+					.userid(1)
 					.build());
 	  });	
 	}
@@ -207,7 +229,7 @@ class ContactServiceTest {
 					.id(1)
 					.name("jonatan")
 					.number("")
-					.idUser(1)
+					.userid(1)
 					.build());
 	  });	
 	}
@@ -221,7 +243,7 @@ class ContactServiceTest {
 					.id(1)
 					.name("jonatan")
 					.number("113245678")
-					.idUser(1)
+					.userid(1)
 					.build());
 	  });	
 	}

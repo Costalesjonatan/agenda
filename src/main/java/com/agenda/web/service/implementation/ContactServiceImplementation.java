@@ -52,7 +52,7 @@ public class ContactServiceImplementation implements ContactServiceInterface  {
 	}
 
 	@Override
-	public List<Contact> getAllContactsOfAuserForId(long id) {
+	public List<Contact> getAllContactByUserId(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
