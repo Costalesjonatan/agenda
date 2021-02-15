@@ -35,7 +35,7 @@ class ContactServiceTest {
 	}
 	
 	@Test
-	public void shouldNotCreateContactBecuseEmptyName(){
+	public void shouldNotCreateContactBecuseNullName(){
 		givenContactDAO();
 		giverContactService();
 		
@@ -43,6 +43,21 @@ class ContactServiceTest {
 			contactService.createContact(Contact.builder()
 					.id(1)
 					.name(null)
+					.number("1139586203")
+					.idUser(1)
+					.build());
+	  });	
+	}
+	
+	@Test
+	public void shouldNotCreateContactBecuseEmptyName(){
+		givenContactDAO();
+		giverContactService();
+		
+		assertThrows(InvalidDataException.class, () -> {
+			contactService.createContact(Contact.builder()
+					.id(1)
+					.name("")
 					.number("1139586203")
 					.idUser(1)
 					.build());
